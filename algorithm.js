@@ -20,7 +20,7 @@
         bubbleSort: function(arr) {
             var n = arr.length, i, j;
             for(i = 0; i < n; i++) {
-                for(j = 0; j < i - 1; j++) {
+                for(j = 0; j < n; j++) {
                     if(arr[j] > arr[j + 1]) {
                         this.exchange(arr, j, j + 1);
                     }
@@ -39,7 +39,7 @@
                         min = j;
                     }
                 }
-                this.exchange(arr, i, j);
+                this.exchange(arr, i, min);
             }
             return arr;
         },
@@ -54,12 +54,30 @@
             }
             return arr;
         },
-
+        quickSort: function(arr) {
+            if(arr.length <= 1) { return arr; }
+            var n = arr.length,
+                pivotIndex = Math.floor(arr.length / 2),
+                pivot = arr[pivotIndex], i = 0, left = [], right = [];
+            for(i = 0; i < n; i++) {
+                if(arr[i] < pivot) {
+                    left.push(arr[i]);
+                } else if(arr[i] > pivot){
+                    right.push(arr[i]);
+                }
+            }
+            return this.quickSort(left).concat([pivot], this.quickSort(right));
+        }
 
     };
 
-    if(module && module.exports) {
-        module.exports = algo;
+    if(typeof exports !== 'undefined') {
+        if(typeof module !== 'undefined' && module.exports) {
+            exports = module.exports = algo;
+        }
+        exports.algo = algo;
+    } else {
+        this.algo = algo;
     }
 
 }).call(this);
