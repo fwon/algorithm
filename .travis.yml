@@ -1,0 +1,4 @@
+language: js
+
+script:
+  - node test.js
