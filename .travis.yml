@@ -1,4 +1,4 @@
 language: js
 
 script:
-  - node test.js
+  - node tests.js
